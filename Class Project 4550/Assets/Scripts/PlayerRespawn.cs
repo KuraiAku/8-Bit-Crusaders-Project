@@ -1,10 +1,7 @@
-using System.Diagnostics;
 using UnityEngine;
 
-[DebuggerDisplay("{" + nameof(GetDebuggerDisplay) + V)]
 public class PlayerRespawn : MonoBehaviour
 {
-    private const string V = "(),nq}";
     public static Vector3 lastCheckpoint;
     private Vector3 startPosition;
 
@@ -17,11 +14,5 @@ public class PlayerRespawn : MonoBehaviour
     public void Respawn()
     {
         transform.position = lastCheckpoint;
-
-    }
-
-    private string GetDebuggerDisplay()
-    {
-        return ToString();
     }
 }
