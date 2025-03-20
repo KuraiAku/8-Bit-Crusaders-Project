@@ -5,43 +5,31 @@ using UnityEngine.UI;
 
 public class HealthSystems : MonoBehaviour
 {
-    private int maxHealth = 100;
+    public int maxHealth = 100;
     private int currentHealth;
 
-
-    public Transform groundCheck;
-    public float groundCheckRadius;
-    public LayerMask trapLayer;
     public Slider healthBar; // UI Slider for health bar
 
     private bool iframeActive;
     private float iframeDuration = 0.5f;
 
-    private bool isTouchingTrap;
+    private PlayerRespawn respawnSystem;
 
     private void Start()
     {
         currentHealth = maxHealth;
         UpdateHealthBar();
+        respawnSystem = GetComponent<PlayerRespawn>(); // Get reference to PlayerRespawn
     }
 
-
-    void Update()
+    public void TakeDamage(int damage)
     {
-        Debug.Log("Current Health: " + currentHealth);
-        isTouchingTrap = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, trapLayer);
+        currentHealth -= damage;
+        if (currentHealth < 0) currentHealth = 0; // Prevent negative health
 
-        if (isTouchingTrap && !iframeActive)
-        {
-            TakeDamage(10);
-        }
-    }
-
-    void TakeDamage(int damage)
-    {
-        currentHealth = currentHealth - damage;
         UpdateHealthBar();
-        if (currentHealth <= 0)
+
+        if (currentHealth == 0)
         {
             Respawn();
         }
@@ -50,17 +38,26 @@ public class HealthSystems : MonoBehaviour
             StartCoroutine(iFrame());
         }
     }
+
     IEnumerator iFrame()
     {
         iframeActive = true;
-        yield return new WaitForSeconds(iframeDuration); // Wait for 0.5 seconds
+        yield return new WaitForSeconds(iframeDuration);
         iframeActive = false;
     }
 
     void Respawn()
     {
-        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
-        SceneManager.LoadScene(currentSceneIndex); // Reload current scene
+        if (respawnSystem != null)
+        {
+            transform.position = PlayerRespawn.lastCheckpoint; // Move to last checkpoint
+            currentHealth = maxHealth; // Restore full health
+            UpdateHealthBar();
+        }
+        else
+        {
+            Debug.LogError("PlayerRespawn component not found on player.");
+        }
     }
 
     void UpdateHealthBar()
