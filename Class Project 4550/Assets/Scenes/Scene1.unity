@@ -27380,11 +27380,11 @@ GameObject:
   m_Component:
   - component: {fileID: 997246901}
   - component: {fileID: 997246900}
-  - component: {fileID: 997246902}
   - component: {fileID: 997246904}
   - component: {fileID: 997246905}
   - component: {fileID: 997246906}
   - component: {fileID: 997246907}
+  - component: {fileID: 997246908}
   m_Layer: 7
   m_Name: Player
   m_TagString: Player
@@ -27461,25 +27461,6 @@ Transform:
   - {fileID: 1776875246}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &997246902
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 997246899}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3bfeffe2a273d934c8e1295cb0ae5945, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 5
-  jumpSpeed: 8
-  groundCheck: {fileID: 1776875246}
-  groundCheckRadius: 0
-  backgroundLayer:
-    serializedVersion: 2
-    m_Bits: 0
 --- !u!50 &997246904
 Rigidbody2D:
   serializedVersion: 4
@@ -27578,6 +27559,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e8125e43d2204260a9685de1f66c89c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &997246908
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 997246899}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 989ec319f32dc7748b05ad662c88cee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 5
+  jumpSpeed: 8
+  groundCheck: {fileID: 1776875246}
+  groundCheckRadius: 1
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1 &1010916453
 GameObject:
   m_ObjectHideFlags: 0
