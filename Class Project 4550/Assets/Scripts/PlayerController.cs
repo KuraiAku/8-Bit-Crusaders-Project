@@ -14,9 +14,9 @@ public class PlayerControler : MonoBehaviour
 
 
 
-    //Movement
+//Movement
 
-    public float speed = 5f;
+    public float speed = 5f;
 
     public float jumpSpeed = 8f;
 
@@ -32,7 +32,7 @@ public class PlayerControler : MonoBehaviour
 
     public LayerMask backgroundLayer; // Only background tiles
 
-    private bool isOnBackground; // If true, disable movement
+    private bool isOnBackground; // If true, disable movement
 
 
 
@@ -40,9 +40,9 @@ public class PlayerControler : MonoBehaviour
 
 
 
-    // Start is called before the first frame update
+    // Start is called before the first frame update
 
-    void Start()
+    void Start()
 
     {
 
@@ -52,9 +52,9 @@ public class PlayerControler : MonoBehaviour
 
 
 
-    // Update is called once per frame
+    // Update is called once per frame
 
-    void Update()
+    void Update()
 
     {
 
@@ -68,31 +68,34 @@ public class PlayerControler : MonoBehaviour
 
         {
 
-            player.velocity = new Vector2(direction * speed, player.velocity.y);    //Moving Right
+            player.velocity = new Vector2(direction * speed, player.velocity.y);
+            //Moving Right
 
-            //Debug.Log("Case 1"); 
+            //Debug.Log("Case 1");?
 
-        }
+        }
 
         else if (direction < 0f)
 
         {
 
-            player.velocity = new Vector2(direction * speed, player.velocity.y);    //Moving Left
+            player.velocity = new Vector2(direction * speed, player.velocity.y);
+            //Moving Left
 
-            //Debug.Log("Case 2"); 
+            //Debug.Log("Case 2");?
 
-        }
+        }
 
         else
 
         {
 
-            player.velocity = new Vector2(0, player.velocity.y);    //Idle
+            player.velocity = new Vector2(0, player.velocity.y);
+            //Idle
 
-            //Debug.Log("Case 3"); 
+         //Debug.Log("Case 3");?
 
-        }
+        }
 
 
 
@@ -102,9 +105,9 @@ public class PlayerControler : MonoBehaviour
 
             player.velocity = new Vector2(player.velocity.x, jumpSpeed);
 
-            //Debug.Log("Case 4");
+         //Debug.Log("Case 4");
 
-        }
+         }
 
     }
 
