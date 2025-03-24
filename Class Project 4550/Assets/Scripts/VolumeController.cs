@@ -8,6 +8,7 @@ public class VolumeControler : MonoBehaviour
 {
     public Slider volumeSlider;
     public AudioSource bgmSource;
+    public AudioSource sfxSource;
 
 
     void Start()
@@ -20,6 +21,7 @@ public class VolumeControler : MonoBehaviour
 
     public void ChangeVolume(float volume)
     {
+            Debug.Log("Volume Changed to: " + volume);
             bgmSource.volume = volume;
     }
 
