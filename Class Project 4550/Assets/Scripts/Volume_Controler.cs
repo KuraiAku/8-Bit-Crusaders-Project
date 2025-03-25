@@ -9,13 +9,23 @@ public class VolumeControler : MonoBehaviour
     public Slider volumeSlider;
     public Slider sfxSlider;
     public AudioSource bgmSource;
-    public AudioSource sfxSource;
+    public List<AudioSource> sfxSources = new List<AudioSource>();
 
 
     void Start()
     {
         volumeSlider.value = bgmSource.volume;
         sfxSlider.value = sfxSource.volume;
+
+        foreach (GameObject obj in GameObject.FindGameObjectsWithTag("SFX"))
+        {
+            AudioSource audio = obj.GetComponent<AudioSource>();
+            if (audio != null)
+            {
+                sfxSources.Add(audio);
+                audio.volume = sfxSlider.value;
+            }
+        }
 
 
         volumeSlider.onValueChanged.AddListener(ChangeVolume);
@@ -30,22 +40,26 @@ public class VolumeControler : MonoBehaviour
     {
             Debug.Log("Volume Changed to: " + volume);
             bgmSource.volume = volume;
+            PlayerPrefs.SetFloat("BGMVolume", volume)
     }
 
     public void ChangeSFXVolume(float volume)
     {
         Debug.Log("SFX Volume Changed to: " + volume);
-        sfxSource.volume = volume;
+        PlayerPrefs.SetFloat("SFXVolume", volume);
+
+        foreach (AudioSource sfx in sfxSources)
+        {
+            sfx.volume = volume;
+        }
     }
 
     public void PlaySFX()
     {
-        sfxSource.Play();
+        if (sfxSlider != null)
+        {
+            sfxSlider.volume = sfxSlider.value;
+            sfx.Play();
+        }
     }
-
-    public void Update()
-    {
-        Debug.Log("Current SFX Volume: " + sfxSource.volume);
-    }
-
 }
