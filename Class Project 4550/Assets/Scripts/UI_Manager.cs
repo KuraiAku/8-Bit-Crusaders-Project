@@ -36,8 +36,8 @@ public class Menu : MonoBehaviour
 
     public void BackToGame()
     {
-        optionsPanel.SetActive(false);
-        Time.timeScale = 1f;
+        CloseOptions();
+        isPaused = false;
     }
 
     void Update()
