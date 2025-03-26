@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-
 public class VolumeControler : MonoBehaviour
 {
     public Slider volumeSlider;
@@ -11,11 +10,17 @@ public class VolumeControler : MonoBehaviour
     public AudioSource bgmSource;
     public List<AudioSource> sfxSources = new List<AudioSource>();
 
+    private AudioSource sfxSource; // Single reference for an SFX source
 
     void Start()
     {
         volumeSlider.value = bgmSource.volume;
-        sfxSlider.value = sfxSource.volume;
+
+        if (sfxSources.Count > 0)
+        {
+            sfxSource = sfxSources[0]; // Assign first SFX source
+            sfxSlider.value = sfxSource.volume;
+        }
 
         foreach (GameObject obj in GameObject.FindGameObjectsWithTag("SFX"))
         {
@@ -27,20 +32,18 @@ public class VolumeControler : MonoBehaviour
             }
         }
 
-
         volumeSlider.onValueChanged.AddListener(ChangeVolume);
         sfxSlider.onValueChanged.AddListener(ChangeSFXVolume);
-        
-        Debug.Log("Initial volume: " + bgmSource.volume);
-        Debug.Log("Initial SFX volume: " + sfxSource.volume);
 
+        Debug.Log("Initial volume: " + bgmSource.volume);
+        if (sfxSource != null) Debug.Log("Initial SFX volume: " + sfxSource.volume);
     }
 
     public void ChangeVolume(float volume)
     {
-            Debug.Log("Volume Changed to: " + volume);
-            bgmSource.volume = volume;
-            PlayerPrefs.SetFloat("BGMVolume", volume)
+        Debug.Log("Volume Changed to: " + volume);
+        bgmSource.volume = volume;
+        PlayerPrefs.SetFloat("BGMVolume", volume);
     }
 
     public void ChangeSFXVolume(float volume)
@@ -56,10 +59,9 @@ public class VolumeControler : MonoBehaviour
 
     public void PlaySFX()
     {
-        if (sfxSlider != null)
+        if (sfxSources.Count > 0)
         {
-            sfxSlider.volume = sfxSlider.value;
-            sfx.Play();
+            sfxSources[0].Play(); // Play the first available SFX
         }
     }
 }

@@ -1,6 +1,5 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class HealthSystems : MonoBehaviour
@@ -8,7 +7,7 @@ public class HealthSystems : MonoBehaviour
     public int maxHealth = 100;
     private int currentHealth;
 
-    public Slider healthBar; // UI Slider for health bar
+    [SerializeField] private HealthBar healthBar; // HealthBar reference
 
     private bool iframeActive;
     private float iframeDuration = 0.5f;
@@ -18,16 +17,26 @@ public class HealthSystems : MonoBehaviour
     private void Start()
     {
         currentHealth = maxHealth;
-        UpdateHealthBar();
+
+        if (healthBar != null)
+        {
+            healthBar.SetMaxHealth(maxHealth); // Initialize UI health bar
+        }
+
         respawnSystem = GetComponent<PlayerRespawn>(); // Get reference to PlayerRespawn
     }
 
     public void TakeDamage(int damage)
     {
+        if (iframeActive) return; // Prevent taking damage during iFrames
+
         currentHealth -= damage;
         if (currentHealth < 0) currentHealth = 0; // Prevent negative health
 
-        UpdateHealthBar();
+        if (healthBar != null)
+        {
+            healthBar.SetHealth(currentHealth); // Update health bar
+        }
 
         if (currentHealth == 0)
         {
@@ -52,19 +61,15 @@ public class HealthSystems : MonoBehaviour
         {
             transform.position = PlayerRespawn.lastCheckpoint; // Move to last checkpoint
             currentHealth = maxHealth; // Restore full health
-            UpdateHealthBar();
+
+            if (healthBar != null)
+            {
+                healthBar.SetHealth(currentHealth); // Update health bar
+            }
         }
         else
         {
             Debug.LogError("PlayerRespawn component not found on player.");
-        }
-    }
-
-    void UpdateHealthBar()
-    {
-        if (healthBar != null)
-        {
-            healthBar.value = (float)currentHealth / maxHealth; // Normalize health (0 to 1)
         }
     }
 }
