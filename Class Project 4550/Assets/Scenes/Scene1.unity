@@ -28073,7 +28073,7 @@ GameObject:
   - component: {fileID: 266041777}
   - component: {fileID: 266041776}
   m_Layer: 0
-  m_Name: L1_CheckPoint
+  m_Name: L1.1_CheckPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28091,7 +28091,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2fb17390b6c942e1876319641f6f63a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  checkpoint_sound: {fileID: 0}
+  checkpointSFXIndex: 1
+  onCheckpointReached:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 592965947}
+        m_TargetAssemblyTypeName: VolumeControler, Assembly-CSharp
+        m_MethodName: PlaySFX
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!61 &266041777
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -29082,6 +29097,7 @@ MonoBehaviour:
   bgmSource: {fileID: 883495248}
   sfxSources:
   - {fileID: 548062513}
+  - {fileID: 1325868474}
 --- !u!1 &647398775
 GameObject:
   m_ObjectHideFlags: 0
@@ -29494,7 +29510,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 3e7823c9df8bf5e47ad59d82f7563700, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -31462,7 +31478,7 @@ GameObject:
   - component: {fileID: 1325868475}
   - component: {fileID: 1325868474}
   m_Layer: 0
-  m_Name: CheckPoint_Audio
+  m_Name: SFX_CheckPointAudio
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -31478,8 +31494,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_audioClip: {fileID: 8300000, guid: efeef0829a36bc341ab2d202712d39af, type: 3}
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -77027,7 +77043,7 @@ GameObject:
   - component: {fileID: 2033816448}
   - component: {fileID: 2033816447}
   m_Layer: 0
-  m_Name: L1_CheckPoint (1)
+  m_Name: L1.2_CheckPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -77045,7 +77061,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2fb17390b6c942e1876319641f6f63a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  checkpoint_sound: {fileID: 0}
+  checkpointSFXIndex: 1
+  onCheckpointReached:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!61 &2033816448
 BoxCollider2D:
   m_ObjectHideFlags: 0
