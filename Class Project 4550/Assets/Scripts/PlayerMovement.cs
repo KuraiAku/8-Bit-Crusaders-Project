@@ -4,7 +4,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     float horizontalInput;
-    float moveSpeed = 5.1f;
+    public float moveSpeed = 5.1f;
     bool isFacingRight = false;
     float jumpPower = 9f;
     bool isGrounded = false;
