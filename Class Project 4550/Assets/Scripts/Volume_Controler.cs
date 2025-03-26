@@ -22,15 +22,6 @@ public class VolumeControler : MonoBehaviour
             sfxSlider.value = sfxSource.volume;
         }
 
-        foreach (GameObject obj in GameObject.FindGameObjectsWithTag("SFX"))
-        {
-            AudioSource audio = obj.GetComponent<AudioSource>();
-            if (audio != null)
-            {
-                sfxSources.Add(audio);
-                audio.volume = sfxSlider.value;
-            }
-        }
 
         volumeSlider.onValueChanged.AddListener(ChangeVolume);
         sfxSlider.onValueChanged.AddListener(ChangeSFXVolume);

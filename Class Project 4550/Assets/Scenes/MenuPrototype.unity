@@ -281,7 +281,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d167abbde144af4c8ba1cb3719b361f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  optionsPanel: {fileID: 0}
+  optionsPanel: {fileID: 1253941355}
 --- !u!1 &59252458
 GameObject:
   m_ObjectHideFlags: 0
@@ -404,7 +404,8 @@ MonoBehaviour:
   volumeSlider: {fileID: 1576360772}
   sfxSlider: {fileID: 2042000897}
   bgmSource: {fileID: 523457811}
-  sfxSource: {fileID: 1833468686}
+  sfxSources:
+  - {fileID: 1833468686}
 --- !u!1 &276181179
 GameObject:
   m_ObjectHideFlags: 0
@@ -3426,7 +3427,7 @@ MonoBehaviour:
       - m_Target: {fileID: 149203204}
         m_TargetAssemblyTypeName: VolumeControler, Assembly-CSharp
         m_MethodName: ChangeSFXVolume
-        m_Mode: 4
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
