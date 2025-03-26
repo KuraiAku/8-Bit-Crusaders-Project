@@ -48,7 +48,7 @@ public class VolumeControler : MonoBehaviour
         }
     }
 
-    public void PlaySFX()
+    public void PlaySFX(int index)
     {
         if (sfxSources.Count > 0)
         {
