@@ -3,6 +3,12 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+
+    public int walkingSFXIndex = 3;
+    public int jumpingSFXIndex = 2;
+
+    private VolumeControler volumeControler;
+
     float horizontalInput;
     public float moveSpeed = 5.1f;
     bool isFacingRight = false;
@@ -11,10 +17,11 @@ public class PlayerMovement : MonoBehaviour
 
     Rigidbody2D rb;
     Animator animator;
-
     // Start is called before the first frame update
     void Start()
     {
+        volumeControler = FindObjectOfType<VolumeControler>();
+
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
     }
@@ -26,11 +33,39 @@ public class PlayerMovement : MonoBehaviour
 
         FlipSprite();
 
+
+        if (horizontalInput != 0f && isGrounded)
+        {
+            if(!volumeControler.sfxSources[walkingSFXIndex].isPlaying)
+            {
+                volumeControler.sfxSources[walkingSFXIndex].Play();
+            }
+        } else if (horizontalInput == 0f && isGrounded)
+        {
+            if (volumeControler.sfxSources[walkingSFXIndex].isPlaying)
+            {
+                volumeControler.sfxSources[walkingSFXIndex].Stop();
+            }
+        }
+
+        if(!isGrounded && volumeControler.sfxSources[walkingSFXIndex].isPlaying)
+        {
+            volumeControler.sfxSources[walkingSFXIndex].Stop();
+        }
+
+
         if(Input.GetButtonDown("Jump") && isGrounded)
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpPower);
             isGrounded = false;
             animator.SetBool("isJumping", !isGrounded);
+
+            if (volumeControler.sfxSources[walkingSFXIndex].isPlaying)
+            {
+            volumeControler.sfxSources[walkingSFXIndex].Stop();
+            }
+
+            volumeControler.PlaySFX(jumpingSFXIndex);
         }
     }
 

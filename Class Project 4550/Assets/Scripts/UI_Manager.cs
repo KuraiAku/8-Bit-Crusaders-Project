@@ -17,10 +17,12 @@ public class Menu : MonoBehaviour
     }
 
     public GameObject optionsPanel;
+    public GameObject optionsButton;
     private bool isPaused = false;
 
     public void OpenOptions()
     {
+        optionsButton.SetActive(false);
         optionsPanel.SetActive(true);
         Time.timeScale = 0f;
         isPaused = true;
@@ -29,6 +31,7 @@ public class Menu : MonoBehaviour
 
     public void CloseOptions()
     {
+        optionsButton.SetActive(true);
         optionsPanel.SetActive(false);
         Time.timeScale = 1f;
         isPaused = false;

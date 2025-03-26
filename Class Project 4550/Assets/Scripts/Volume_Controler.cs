@@ -50,9 +50,13 @@ public class VolumeControler : MonoBehaviour
 
     public void PlaySFX(int index)
     {
-        if (sfxSources.Count > 0)
+        if (index >= 0 && index < sfxSources.Count) // Ensure index is valid
         {
-            sfxSources[0].Play(); // Play the first available SFX
+            sfxSources[index].Play();
+        }
+        else
+        {
+            Debug.LogWarning("Invalid SFX index: " + index);
         }
     }
 }
