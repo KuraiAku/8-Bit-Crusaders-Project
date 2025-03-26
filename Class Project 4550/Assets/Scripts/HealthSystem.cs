@@ -13,6 +13,7 @@ public class HealthSystems : MonoBehaviour
     private float iframeDuration = 0.5f;
 
     private PlayerRespawn respawnSystem;
+    private GameOver gameOver;
 
     private void Start()
     {
@@ -24,6 +25,7 @@ public class HealthSystems : MonoBehaviour
         }
 
         respawnSystem = GetComponent<PlayerRespawn>(); // Get reference to PlayerRespawn
+        gameOver = FindObjectOfType<GameOver>();
     }
 
     public void TakeDamage(int damage)
@@ -38,13 +40,23 @@ public class HealthSystems : MonoBehaviour
             healthBar.SetHealth(currentHealth); // Update health bar
         }
 
-        if (currentHealth == 0)
+        if (currentHealth <= 0)
         {
-            Respawn();
+            Die();
         }
         else
         {
             StartCoroutine(iFrame());
+        }
+    }
+
+    private void Die() {
+        if (gameOver != null){
+            gameOver.ShowGameOver();
+            Debug.Log("Calling ShowGameOver!");
+        }
+        else{
+            Debug.LogError("GameOver script not found in scene.");
         }
     }
 
@@ -62,8 +74,7 @@ public class HealthSystems : MonoBehaviour
             transform.position = PlayerRespawn.lastCheckpoint; // Move to last checkpoint
             currentHealth = maxHealth; // Restore full health
 
-            if (healthBar != null)
-            {
+            if (healthBar != null) {
                 healthBar.SetHealth(currentHealth); // Update health bar
             }
         }

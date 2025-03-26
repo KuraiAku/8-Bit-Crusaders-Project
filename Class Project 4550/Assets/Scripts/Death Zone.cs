@@ -7,14 +7,17 @@ public class DeathZone : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             HealthSystems healthSystem = collision.GetComponent<HealthSystems>();
+            PlayerRespawn respawn = collision.GetComponent<PlayerRespawn>();
 
             if (healthSystem != null)
             {
-                int damage = healthSystem.maxHealth / 4; // Take 1/4 of max health
+                int damage = healthSystem.maxHealth / 4; // Deal 1/4 of max health
                 healthSystem.TakeDamage(damage);
+            }
 
-                // Move player back to last checkpoint
-                collision.transform.position = PlayerRespawn.lastCheckpoint;
+            if (respawn != null)
+            {
+                collision.transform.position = PlayerRespawn.lastCheckpoint; // or respawn.lastCheckpoint if it's not static
             }
         }
     }
